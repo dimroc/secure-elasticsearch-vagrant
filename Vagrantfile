@@ -32,12 +32,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "shell", path: 'install_ruby.sh'
   config.vm.provision "shell", path: 'create_files.sh'
 
-  config.vm.provision "docker", images: ["dockerfile/nginx", "dockerfile/elasticsearch"] do |d|
-    # docker run -d -p 127.0.0.1:9200:9200 -p 127.0.0.1:9300:9300 dockerfile/elasticsearch # only allows localhost connections w 127.0.0.1
+  config.vm.provision "docker", images: ["dimroc/nginx", "dockerfile/elasticsearch"] do |d|
     d.run "dockerfile/elasticsearch", daemonize: true, args: "--name es -p 127.0.0.1:9200:9200 -p 127.0.0.1:9300:9300"
 
-    # docker run -d -p 80:80 dockerfile/nginx
-    d.run "dockerfile/nginx", daemonize: true, args: "--name nginx --link es:es -p 80:80 -v /etc/nginx/sites-enabled:/etc/nginx/sites-enabled -v /var/log/nginx:/var/log/nginx"
+    d.run "dimroc/nginx",
+      daemonize: true,
+      args: "--name nginx --link es:es -p 80:80 -p 443:443 -v /etc/nginx/conf.d:/etc/nginx/conf.d -v /etc/nginx/sites-enabled:/etc/nginx/sites-enabled -v /var/log/nginx:/var/log/nginx"
   end
 
   config.vm.define "nginx_elasticsearch"
