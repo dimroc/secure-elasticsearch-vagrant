@@ -23,7 +23,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.instance_type = "i2.xlarge"
 
     aws.elastic_ip = true
-    aws.associate_public_ip = true
     aws.tags = { "Name" => "NGINX Basic Auth + ES" }
   end
 
