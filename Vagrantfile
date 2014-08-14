@@ -7,6 +7,7 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :virtualbox do |vbox, override|
     override.vm.box = "dimroc/ubuntu14.04"
+    override.vm.network "forwarded_port", guest: 80, host: 49200
   end
 
   config.vm.provider :aws do |aws, override|
