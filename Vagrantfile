@@ -30,9 +30,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision "shell", inline: 'sudo apt-get update'
-  config.vm.provision "shell", path: 'install_cli_helpers.sh'
-  config.vm.provision "shell", path: 'install_ruby.sh'
-  config.vm.provision "shell", path: 'create_files.sh'
+  config.vm.provision "shell", path: 'scripts/install_cli_helpers.sh'
+  config.vm.provision "shell", path: 'scripts/install_ruby.sh'
+  config.vm.provision "shell", path: 'scripts/create_files.sh'
 
   config.vm.provision "docker", images: ["dockerfile/nginx", "dockerfile/elasticsearch"] do |d|
     d.run "dockerfile/elasticsearch",
