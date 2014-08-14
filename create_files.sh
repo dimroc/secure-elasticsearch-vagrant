@@ -1,5 +1,7 @@
 # vi: set ft=bash :
 
+echo 'Creating nginx and ES files...'
+
 # nginx
 sudo mkdir -p /var/log/nginx
 sudo mkdir -p /etc/nginx/sites-enabled

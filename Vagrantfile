@@ -21,6 +21,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     aws.ami = "ami-864d84ee"
     aws.instance_type = "i2.xlarge"
+    aws.block_device_mapping = [
+      { 'DeviceName' => '/dev/sda1', 'Ebs.VolumeSize' => 120, 'Ebs.VolumeType' => 'gp2' }
+    ]
 
     aws.elastic_ip = true
     aws.tags = { "Name" => "NGINX Basic Auth + ES" }
