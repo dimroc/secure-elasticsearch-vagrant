@@ -7,7 +7,7 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :virtualbox do |vbox, override|
     override.vm.box = "dimroc/ubuntu14.04"
-    override.vm.network "forwarded_port", guest: 80, host: 49200
+    override.vm.network "forwarded_port", guest: 80, host: 8888
   end
 
   config.vm.provider :aws do |aws, override|
@@ -24,7 +24,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     aws.elastic_ip = true
     aws.associate_public_ip = true
-    aws.subnet_id = "subnet-0901194f"
     aws.tags = { "Name" => "NGINX Basic Auth + ES" }
   end
 
@@ -34,7 +33,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "shell", path: 'create_files.sh'
 
   config.vm.provision "docker", images: ["dockerfile/nginx", "dockerfile/elasticsearch"] do |d|
-    d.run "dockerfile/elasticsearch", daemonize: true, args: "--name es -p 127.0.0.1:9200:9200 -p 127.0.0.1:9300:9300"
+    d.run "dockerfile/elasticsearch",
+      daemonize: true,
+      cmd: "/elasticsearch/bin/elasticsearch -Des.config=/data/elasticsearch.yml",
+      args: "--name es -p 127.0.0.1:9200:9200 -p 127.0.0.1:9300:9300 -v /data:/data"
 
     d.run "dockerfile/nginx",
       daemonize: true,
