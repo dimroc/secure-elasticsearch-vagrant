@@ -13,11 +13,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :aws do |aws, override|
     override.vm.box = "dimroc/awsdummy"
     override.ssh.username = "ubuntu"
-    override.ssh.private_key_path = "~/.ssh/dimitrib.qa.pem"
 
     aws.access_key_id = ENV["AWS_ACCESS_KEY_ID"]
     aws.secret_access_key = ENV["AWS_SECRET_ACCESS_KEY"]
+
+    # AWS Keypair name and private key path. Required to SSH into created instance.
     aws.keypair_name = 'dimitrib'
+    override.ssh.private_key_path = "~/.ssh/dimitrib.qa.pem"
 
     aws.ami = "ami-864d84ee"
     aws.instance_type = "i2.xlarge"
