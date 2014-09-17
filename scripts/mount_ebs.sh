@@ -1,4 +1,4 @@
-# vi: set ft=bash :
+# vi: set ft=sh :
 # Used if mounting separate EBS volume for AWS provider.
 
 echo 'Mounting extra EBS volume...'

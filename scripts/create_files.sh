@@ -1,4 +1,4 @@
-# vi: set ft=bash :
+# vi: set ft=sh :
 
 echo 'Creating nginx and ES files...'
 
@@ -11,9 +11,9 @@ sudo cp /vagrant/nginx/elasticsearch.htpasswd /etc/nginx/conf.d/elasticsearch.ht
 sudo cp /vagrant/nginx/elasticsearch.nginx.conf /etc/nginx/sites-enabled/elasticsearch
 
 # elasticsearch
-sudo mkdir -p /data/data
-sudo mkdir -p /data/log
-sudo mkdir -p /data/plugins
-sudo mkdir -p /data/work
+sudo mkdir -p /mnt/data/data
+sudo mkdir -p /mnt/data/log
+sudo mkdir -p /mnt/data/plugins
+sudo mkdir -p /mnt/data/work
 
-sudo cp -R /vagrant/elasticsearch/data /
+sudo cp -R /vagrant/elasticsearch/data /mnt/
