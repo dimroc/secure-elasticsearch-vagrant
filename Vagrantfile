@@ -36,11 +36,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.secret_access_key = ENV["AWS_SECRET_ACCESS_KEY"]
 
     # AWS Keypair name and private key path. Required to SSH into created instance.
-    aws.keypair_name = 'dimitrib'
-    override.ssh.private_key_path = "~/.ssh/dimitrib.qa.pem"
+    aws.keypair_name = 'loopandtie-qa'
+    override.ssh.private_key_path = "~/.ssh/loopandtie-qa.pem"
 
     aws.ami = "ami-864d84ee"
-    aws.instance_type = "r3.4xlarge"
+    aws.instance_type = "m1.small"
     aws.block_device_mapping = [
       { 'DeviceName' => '/dev/sda1', 'Ebs.VolumeSize' => 20, 'Ebs.VolumeType' => 'gp2' },
       { 'DeviceName' => '/dev/sdb', 'VirtualName' => 'ephemeral0' }
