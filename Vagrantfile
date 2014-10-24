@@ -39,7 +39,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.keypair_name = 'loopandtie-qa'
     override.ssh.private_key_path = "~/.ssh/loopandtie-qa.pem"
 
-    aws.ami = "ami-864d84ee"
+    aws.ami = "ami-98aa1cf0"
     aws.instance_type = "m1.small"
     aws.block_device_mapping = [
       { 'DeviceName' => '/dev/sda1', 'Ebs.VolumeSize' => 20, 'Ebs.VolumeType' => 'gp2' },
